@@ -65,6 +65,13 @@ Eigen::Vector4d AxisAng3(const Eigen::Vector3d&);
 Eigen::Matrix3d MatrixExp3(const Eigen::Matrix3d&);
 
 
+/* Function: Computes the matrix logarithm of a rotation matrix
+ * Inputs: Rotation matrix
+ * Returns: matrix logarithm of a rotation
+ */
+Eigen::Matrix3d MatrixLog3(const Eigen::Matrix3d&);
+
+
 /*
  * Function: Combines a rotation matrix and position vector into a single
  * 				Special Euclidian Group (SE3) homogeneous transformation matrix
@@ -90,6 +97,13 @@ std::vector<Eigen::MatrixXd> TransToRp(const Eigen::MatrixXd&);
  * Returns: Transformation matrix
  */
 Eigen::MatrixXd VecTose3(const Eigen::VectorXd&);
+
+
+/* Function: Translates a transformation matrix into a spatial velocity vector
+ * Inputs: Transformation matrix
+ * Returns: Spatial velocity vector [angular velocity, linear velocity]
+ */
+Eigen::VectorXd se3ToVec(const Eigen::MatrixXd&);
 
 
 /*
@@ -120,6 +134,18 @@ Eigen::MatrixXd MatrixExp6(const Eigen::MatrixXd&);
  * Notes: FK means Forward Kinematics
  */
 Eigen::MatrixXd FKinSpace(const Eigen::MatrixXd&, const Eigen::MatrixXd&, const Eigen::VectorXd&);
+
+/*
+ * Function: Compute end effector frame (used for current body position calculation)
+ * Inputs: Home configuration (position and orientation) of end-effector
+ *		   The joint screw axes in the body frame when the manipulator
+ *             is at the home position
+ * 		   A list of joint coordinates.
+ * Returns: Transfomation matrix representing the end-effector frame when the joints are
+ *				at the specified coordinates
+ * Notes: FK means Forward Kinematics
+ */
+Eigen::MatrixXd FKinBody(const Eigen::MatrixXd&, const Eigen::MatrixXd&, const Eigen::VectorXd&);
 
 
 /*
